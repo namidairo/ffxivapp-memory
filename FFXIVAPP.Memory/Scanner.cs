@@ -93,7 +93,8 @@ namespace FFXIVAPP.Memory
 
         private void FindExtendedSignatures(IEnumerable<Signature> signatures)
         {
-            const int bufferSize = 0x1000;
+            const int bufferSize = 0x1200;
+            const int regionIncrement = 0x1000;
             var moduleMemorySize = MemoryHandler.Instance.ProcessModel.Process.MainModule.ModuleMemorySize;
             var baseAddress = MemoryHandler.Instance.ProcessModel.Process.MainModule.BaseAddress;
             var searchEnd = IntPtr.Add(baseAddress, moduleMemorySize);
@@ -123,7 +124,7 @@ namespace FFXIVAPP.Memory
                                 temp.Add(signature);
                                 continue;
                             }
-                            var baseResult = new IntPtr((long) (baseAddress + (regionCount * bufferSize)));
+                            var baseResult = new IntPtr((long) (baseAddress + (regionCount * regionIncrement)));
                             var searchResult = IntPtr.Add(baseResult, idx + signature.Offset);
                             signature.SigScanAddress = new IntPtr(searchResult.ToInt64());
                             Locations.Add(signature.Key, signature);
@@ -132,7 +133,7 @@ namespace FFXIVAPP.Memory
                         temp.Clear();
                     }
                     regionCount++;
-                    searchStart = IntPtr.Add(searchStart, bufferSize);
+                    searchStart = IntPtr.Add(searchStart, regionIncrement);
                 }
                 catch (Exception ex)
                 {

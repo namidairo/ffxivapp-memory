@@ -29,6 +29,7 @@ namespace FFXIVAPP.Memory
             switch (gameLanguage)
             {
                 // Copied from 6eae40ef (Patch 2.5)
+                #region Korean x86
                 case "Korean":
                     signatures.Add(new Signature
                     {
@@ -85,7 +86,9 @@ namespace FFXIVAPP.Memory
                         Offset = 60
                     });
                     break;
+                #endregion
                 // copied from a4cab8e327 (patch 3.07)
+                #region Chinese x64
                 case "Chinese":
                     if (IsWin64)
                     {
@@ -156,6 +159,8 @@ namespace FFXIVAPP.Memory
                             }
                         });
                     }
+                    #endregion
+                #region Chinese x86
                     else
                     {
                         signatures.Add(new Signature
@@ -232,6 +237,8 @@ namespace FFXIVAPP.Memory
                         });
                     }
                     break;
+                #endregion
+                #region English x64
                 default:
                     if (IsWin64)
                     {
@@ -246,15 +253,15 @@ namespace FFXIVAPP.Memory
                         signatures.Add(new Signature
                         {
                             Key = "TARGET",
-                            Value = "48896808488978104c8960184c8968e8488d0d", // 25 digits,
+                            Value = "400fb6f684c0410f45f5488d0d", // 25 digits,
                             ASMSignature = true,
                             PointerPath = new List<long>
                             {
                                 0L, // ACT assumes the first entry after the signature is the pointer. Manually do a zero offset to replicate.
                                 // Start ACT offsets
-                                144L
+                                144L //0x90
                                     // values above are "Target" from ACT. Adjust to what ffxivapp expects:
-                                + 32L
+                                
                             }
                         });
                         signatures.Add(new Signature
@@ -268,9 +275,7 @@ namespace FFXIVAPP.Memory
                                 // Start ACT "ChatLogLenStart" offsets
                                 0L,
                                 48L,
-                                1048L
-                                    // values above are "ChatLogLenStart" from ACT. Adjust to what ffxivapp expects:
-                                - 0x24
+                                0x3DC
                             }
                         });
                         signatures.Add(new Signature
@@ -315,7 +320,7 @@ namespace FFXIVAPP.Memory
                         signatures.Add(new Signature
                         {
                             Key = "PLAYERINFO",
-                            Value = "b83c020000ebc583ff7d75158d57c0488d0d",
+                            Value = "4833c44889442438488bf2488d0d",
                             PointerPath = new List<long>
                             {
                                 0L
@@ -353,62 +358,9 @@ namespace FFXIVAPP.Memory
                                 0x10A5E6C
                             }
                         });
-                        // TODO: Need to do all 64 bit values still
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "GAMEMAIN",
-                        //    Value = "47616D654D61696E000000",
-                        //    Offset = 1672
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "CHARMAP",
-                        //    Value = "DB0FC940AAAA26416E30763FDB0FC93FDB0F49416F12833A000000000000000000000000????0000????0000FFFFFFFF",
-                        //    Offset = 60
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "ENMITYMAP",
-                        //    Value = "FFFFFFFF00000000000000000000000000000000000000000000000000000000000000000000????????????????????????????????????????????DB0FC940AAAA26416E30763FDB0FC93FDB0F49416F12833AFFFFFFFF",
-                        //    Offset = 96 // pre 3.0 2.4
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "PARTYMAP",
-                        //    Value = "FFFFFFFF00000000000000000000000000000000000000000000000000000000000000000000000000000000DB0FC940AAAA26416E30763FDB0FC93FDB0F49416F12833AFFFFFFFF",
-                        //    Offset = -188764
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "PARTYCOUNT",
-                        //    Value = "5F50617274794C69737400",
-                        //    Offset = 2416
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "MAP",
-                        //    Value = "F783843E????????????????????????FFFFFFFFDB0FC940AAAA26416E30763FDB0FC93FDB0F49416F12833A",
-                        //    Offset = 3092
-                        //});
-                        //signatures.Add(new Signature
-                        //{
-                        //    Key = "TARGET",
-                        //    Value = "DB0F49416F12833AFFFFFFFF0000000000000000000000000000000000000000????????00000000DB0FC940AAAA26416E30763FDB0FC93FDB0F49416F12833A0000000000000000",
-                        //    Offset = 472
-                        //});
-                        //MemoryHandler.Instance.PointerPaths["PLAYERINFO"] = new List<long>()
-                        //{
-                        //    0x1679030
-                        //};
-                        //MemoryHandler.Instance.PointerPaths["AGRO"] = new List<long>()
-                        //{
-                        //    0x1678708 + 8
-                        //};
-                        //MemoryHandler.Instance.PointerPaths["AGRO_COUNT"] = new List<long>()
-                        //{
-                        //    0x1679010
-                        //};
                     }
+                    #endregion
+                    #region English x86
                     else // 32 bit
                     {
                         // can still use old style entry of signatures
@@ -539,6 +491,7 @@ namespace FFXIVAPP.Memory
                         //    Offset = 106
                         //});
                     }
+                    #endregion
                     break;
             }
 

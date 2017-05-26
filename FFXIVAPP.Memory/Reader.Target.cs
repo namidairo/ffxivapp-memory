@@ -85,9 +85,9 @@ namespace FFXIVAPP.Memory
                                     currentTarget = BitConverter.ToUInt32(targetInfoSource, 0x0);
                                     if (MemoryHandler.Instance.ProcessModel.IsWin64)
                                     {
-                                        mouseOverTarget = BitConverter.ToUInt32(targetInfoSource, 0x10);
-                                        focusTarget = BitConverter.ToUInt32(targetInfoSource, 0x50);
-                                        previousTarget = BitConverter.ToUInt32(targetInfoSource, 0x68);
+                                        mouseOverTarget = BitConverter.ToUInt32(targetInfoSource, 0x48);
+                                        focusTarget = BitConverter.ToUInt32(targetInfoSource, 0x78);
+                                        previousTarget = BitConverter.ToUInt32(targetInfoSource, 0x90);
                                         currentTargetID = BitConverter.ToUInt32(targetInfoSource, 0x80);
                                     }
                                     else

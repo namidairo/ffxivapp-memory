@@ -32,6 +32,7 @@ namespace FFXIVAPP.Memory.Helpers
 
                 switch (MemoryHandler.Instance.GameLanguage)
                 {
+                    #region Korean
                     case "Korean":
                         entry.JobID = source[0x64];
                         entry.Job = (Actor.Job) entry.JobID;
@@ -202,6 +203,8 @@ namespace FFXIVAPP.Memory.Helpers
                         #endregion
 
                         break;
+                    #endregion
+                    #region Chinese
                     case "Chinese":
                         entry.JobID = source[0x64];
                         entry.Job = (Actor.Job) entry.JobID;
@@ -372,6 +375,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #endregion
 
                         break;
+                    #endregion
                     default:
                         entry.JobID = source[0x66];
                         entry.Job = (Actor.Job) entry.JobID;
@@ -379,7 +383,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #region Job Levels
 
                         var step = 2;
-                        var i = 0x68 - step;
+                        var i = 0x6A - step;
 
                         entry.PGL = source[i += step];
                         entry.GLD = source[i += step];
@@ -449,7 +453,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #region Base Stats
 
                         step = 4;
-                        i = 0x100 - step;
+                        i = 0x104 - step;
 
                         entry.BaseStrength = BitConverter.ToInt16(source, i += step);
                         entry.BaseDexterity = BitConverter.ToInt16(source, i += step);
@@ -463,7 +467,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #region Base Stats (base+gear+bonus)
 
                         step = 4;
-                        i = 0x11C - step;
+                        i = 0x120 - step;
 
                         entry.Strength = BitConverter.ToInt16(source, i += step);
                         entry.Dexterity = BitConverter.ToInt16(source, i += step);
@@ -489,32 +493,32 @@ namespace FFXIVAPP.Memory.Helpers
 
                         #region Offensive Properties
 
-                        entry.Accuracy = BitConverter.ToInt16(source, 0x170);
-                        entry.CriticalHitRate = BitConverter.ToInt16(source, 0x184);
-                        entry.Determination = BitConverter.ToInt16(source, 0x1C8);
+                        entry.Accuracy = BitConverter.ToInt16(source, 0x174);
+                        entry.CriticalHitRate = BitConverter.ToInt16(source, 0x188);
+                        entry.Determination = BitConverter.ToInt16(source, 0x1CC);
 
                         #endregion
 
                         #region Defensive Properties
 
-                        entry.Parry = BitConverter.ToInt16(source, 0x164);
-                        entry.Defense = BitConverter.ToInt16(source, 0x16C);
-                        entry.MagicDefense = BitConverter.ToInt16(source, 0x178);
+                        entry.Parry = BitConverter.ToInt16(source, 0x168);
+                        entry.Defense = BitConverter.ToInt16(source, 0x170);
+                        entry.MagicDefense = BitConverter.ToInt16(source, 0x17C);
 
                         #endregion
 
                         #region Phyiscal Properties
 
-                        entry.AttackPower = BitConverter.ToInt16(source, 0x168);
-                        entry.SkillSpeed = BitConverter.ToInt16(source, 0x1CC);
+                        entry.AttackPower = BitConverter.ToInt16(source, 0x16C);
+                        entry.SkillSpeed = BitConverter.ToInt16(source, 0x1D0);
 
                         #endregion
 
                         #region Mental Properties
 
-                        entry.SpellSpeed = BitConverter.ToInt16(source, 0x174);
-                        entry.AttackMagicPotency = BitConverter.ToInt16(source, 0x19C);
-                        entry.HealingMagicPotency = BitConverter.ToInt16(source, 0x1A0);
+                        entry.SpellSpeed = BitConverter.ToInt16(source, 0x1D4);
+                        entry.AttackMagicPotency = BitConverter.ToInt16(source, 0x1A0);
+                        entry.HealingMagicPotency = BitConverter.ToInt16(source, 0x1A4);
 
                         #endregion
 
@@ -534,7 +538,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #region Elemental Resistances
 
                         step = 4;
-                        i = 0x1AC - step;
+                        i = 0x1B0 - step;
 
                         entry.FireResistance = BitConverter.ToInt16(source, i += step);
                         entry.IceResistance = BitConverter.ToInt16(source, i += step);
@@ -548,7 +552,7 @@ namespace FFXIVAPP.Memory.Helpers
                         #region Physical Resistances
 
                         step = 4;
-                        i = 0x18C - step;
+                        i = 0x190 - step;
 
                         entry.SlashingResistance = BitConverter.ToInt16(source, i += step);
                         entry.PiercingResistance = BitConverter.ToInt16(source, i += step);

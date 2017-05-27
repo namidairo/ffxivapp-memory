@@ -228,7 +228,7 @@ namespace FFXIVAPP.Memory.Helpers
                         Buffer.BlockCopy(source, defaultStatusEffectOffset, statusesSource, 0, limit * 12);
                         break;
                     default:
-                        defaultStatusEffectOffset = MemoryHandler.Instance.ProcessModel.IsWin64 ? 0x3740 : 0x1518; //0x1850
+                        defaultStatusEffectOffset = MemoryHandler.Instance.ProcessModel.IsWin64 ? 0x1850 : 0x1518;
                         Buffer.BlockCopy(source, defaultStatusEffectOffset, statusesSource, 0, limit * statusSize);
                         break;
                 }

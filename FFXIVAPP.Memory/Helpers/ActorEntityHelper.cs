@@ -39,6 +39,7 @@ namespace FFXIVAPP.Memory.Helpers
                 entry.TargetID = 0;
                 switch (MemoryHandler.Instance.GameLanguage)
                 {
+                    #region Korean
                     case "Korean":
                         entry.Name = MemoryHandler.Instance.GetStringFromBytes(source, 48);
                         entry.ID = BitConverter.ToUInt32(source, 0x74);
@@ -87,6 +88,8 @@ namespace FFXIVAPP.Memory.Helpers
                         entry.CastingTime = BitConverter.ToSingle(source, 0x2A68); // 0x2DA8);
                         entry.Coordinate = new Coordinate(entry.X, entry.Z, entry.Y);
                         break;
+                    #endregion
+                    #region Chinese
                     case "Chinese":
                         entry.Name = MemoryHandler.Instance.GetStringFromBytes(source, 48);
                         entry.ID = BitConverter.ToUInt32(source, 0x74);
@@ -139,6 +142,7 @@ namespace FFXIVAPP.Memory.Helpers
                         entry.CastingTime = BitConverter.ToSingle(source, 0x2A68); // 0x2DA8);
                         entry.Coordinate = new Coordinate(entry.X, entry.Z, entry.Y);
                         break;
+                    #endregion
                     default:
                         entry.Name = MemoryHandler.Instance.GetStringFromBytes(source, 0x30);
                         entry.ID = BitConverter.ToUInt32(source, 0x74);
@@ -148,7 +152,7 @@ namespace FFXIVAPP.Memory.Helpers
                         entry.Type = (Actor.Type) source[0x8C];
                         entry.TargetType = (Actor.TargetType) source[0x8D];
                         entry.GatheringStatus = source[0x8F];
-                        entry.Distance = source[0x90];
+                        entry.Distance = source[0x92];
                         defaultBaseOffset = MemoryHandler.Instance.ProcessModel.IsWin64 ? 0x10 : 0;
                         entry.X = BitConverter.ToSingle(source, 0xA0 + defaultBaseOffset);
                         entry.Z = BitConverter.ToSingle(source, 0xA4 + defaultBaseOffset);

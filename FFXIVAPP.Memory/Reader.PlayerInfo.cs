@@ -74,11 +74,8 @@ namespace FFXIVAPP.Memory
                                 enmityStructure = (IntPtr) Scanner.Instance.Locations["CHARMAP"] + 3384;
                                 break;
                             default:
-                                //enmityCount = MemoryHandler.Instance.GetInt16(Scanner.Instance.Locations["AGRO_COUNT"]);
-                                //enmityStructure = Scanner.Instance.Locations["AGRO"];
-
-                                enmityCount =  MemoryHandler.Instance.GetInt16(PlayerInfoMap - 0x24);
-                                enmityStructure = PlayerInfoMap - 0x924;
+                                enmityStructure = (IntPtr) Scanner.Instance.Locations["CHARMAP"] + 0x6AC0;
+                                enmityCount = MemoryHandler.Instance.GetInt16(enmityStructure - 8);
                                 break;
                         }
                         var enmityEntries = new List<EnmityEntry>();

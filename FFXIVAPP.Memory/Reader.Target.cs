@@ -46,7 +46,7 @@ namespace FFXIVAPP.Memory
                             if (Scanner.Instance.Locations.ContainsKey("ENMITYMAP"))
                             {
                                 //targetHateStructure = Scanner.Instance.Locations["ENMITYMAP"];
-                                targetHateStructure = (Scanner.Instance.Locations["PLAYERINFO"].GetAddress()) - 0x122C;
+                                targetHateStructure = (IntPtr) Scanner.Instance.Locations["CHARMAP"] + 0x61B8;
                             }
                             break;
                     }

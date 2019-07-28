@@ -98,7 +98,7 @@ namespace Sharlayan {
                     break;
             }
 
-            for (var i = 0; i < limit; i += 64) {
+            for (var i = 0; i < limit; i += 56) {
                 var itemOffset = new IntPtr(containerAddress + i);
                 var id = MemoryHandler.Instance.GetPlatformUInt(itemOffset, MemoryHandler.Instance.Structures.InventoryItem.ID);
                 if (id > 0) {
